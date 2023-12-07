@@ -1,0 +1,187 @@
+{% extends 'layout/main-sidebar.html' %} {% block formulario %}
+
+<div id="contenedor-formulario">
+  <div class="p-1"></div>
+  <!-- TITULO -->
+  <div class="form-floating">
+    <input
+      id="titulo-input-floating no-placeholder"
+      autocomplete="off"
+      type="text"
+      oninvalid="this.setCustomValidity('El título es obligatorio')"
+      oninput="setCustomValidity('')"
+      class="form-control no-placeholder"
+      placeholder="ph"
+      name="nombre"
+      required
+    />
+    <label class="form-label" for="titulo-input-floating">Título ⋆ </label>
+  </div>
+  <div class="p-1"></div>
+  <!-- AUTOR -->
+  <div class="form-floating">
+    <input
+      id="artista-input-floating"
+      autocomplete="off"
+      type="text"
+      class="form-control no-placeholder"
+      placeholder="Artista"
+      name="autor"
+      oninvalid="this.setCustomValidity('El artista es obligatorio')"
+      oninput="setCustomValidity('')"
+      required
+    />
+    <label class="form-label" for="artista-input-floating">Artista ⋆</label>
+  </div>
+  <div class="p-1"></div>
+  <!-- ALBUM -->
+  <div class="form-floating">
+    <input
+      autocomplete="off"
+      type="text"
+      class="form-control no-placeholder"
+      placeholder="Albúm"
+      name="album"
+    />
+    <label class="form-label">Albúm</label>
+  </div>
+  <div class="p-1"></div>
+  <!-- DURACION -->
+  <div class="form-floating">
+    <input
+      autocomplete="off"
+      type="text"
+      inputmode="numeric"
+      pattern="\d*"
+      class="form-control no-placeholder"
+      title="Solo números"
+      onkeypress="return /\d/.test(String.fromCharCode(event.keyCode || event.which))"
+      placeholder="Duración"
+      name="duracion"
+    />
+    <label class="form-label">Duración en segundos</label>
+  </div>
+  <div class="p-1"></div>
+  <!-- FECHA -->
+  <div class="form-floating">
+    <input
+      id="fecha-input-floating"
+      class="form-control no-placeholder"
+      autocomplete="off"
+      type="text"
+      onfocus="(this.type='date')"
+      onblur="if(!this.value)this.type='text'"
+      placeholder="Fecha de Publicación"
+      name="fecha"
+    />
+    <label class="form-label" for="fecha-input-floating">
+      Fecha de Publicación
+    </label>
+  </div>
+
+  <div class="p-1"></div>
+  <!-- FAVORITO -->
+  <div class="d-flex pt-2 align-items-center justify-content-center">
+    <label>
+      <input type="checkbox" name="favorito" value="1" />
+      <span class="label d-flex flex-row align-items-center gap-8">
+        <p class="m-0">Añadir a favoritos</p>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          fill="currentColor"
+          class="favorite-button-star"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M7.22303 0.665992C7.32551 0.419604 7.67454 0.419604 7.77702 0.665992L9.41343 4.60039C9.45663 4.70426 9.55432 4.77523 9.66645 4.78422L13.914 5.12475C14.18 5.14607 14.2878 5.47802 14.0852 5.65162L10.849 8.42374C10.7636 8.49692 10.7263 8.61176 10.7524 8.72118L11.7411 12.866C11.803 13.1256 11.5206 13.3308 11.2929 13.1917L7.6564 10.9705C7.5604 10.9119 7.43965 10.9119 7.34365 10.9705L3.70718 13.1917C3.47945 13.3308 3.19708 13.1256 3.25899 12.866L4.24769 8.72118C4.2738 8.61176 4.23648 8.49692 4.15105 8.42374L0.914889 5.65162C0.712228 5.47802 0.820086 5.14607 1.08608 5.12475L5.3336 4.78422C5.44573 4.77523 5.54342 4.70426 5.58662 4.60039L7.22303 0.665992Z"
+            fill="currentColor"
+          />
+        </svg>
+      </span>
+    </label>
+  </div>
+  <hr />
+  <!-- URL -->
+  <div class="form-floating">
+    <input
+      title="El link debe ser de Youtube"
+      autocomplete="off"
+      type="text"
+      class="form-control vista-previa-setter no-placeholder"
+      placeholder="Link de Youtube"
+      oninvalid="this.setCustomValidity('El link debe ser un video de Youtube')"
+      oninput="setCustomValidity('')"
+      pattern="/^(http(s)??\:\/\/)?(www\.)?((youtube\.com\/watch\?v=)|(youtu.be\/))([a-zA-Z0-9\-_])+/"
+      name="url"
+    />
+    <label class="form-label">Link de Youtube</label>
+  </div>
+  <div class="p-1"></div>
+  <!-- PORTADA -->
+  <div class="form-floating">
+    <input
+      autocomplete="off"
+      type="text"
+      class="form-control vista-previa-setter no-placeholder"
+      placeholder="Link de la portada"
+      name="portada"
+    />
+    <label class="form-label">Link de la portada</label>
+  </div>
+  <div class="p-1"></div>
+  <!-- COLOR -->
+  <div class="form-floating w-100 mb-4">
+    <input
+      autocomplete="off"
+      type="color"
+      inputmode="numeric"
+      class="form-control no-placeholder form-control-color w-100"
+      placeholder="Color"
+      name="color"
+    />
+    <label class="form-label">Fondo del perfil</label>
+  </div>
+  <!-- VISTA PREVIA -->
+
+  <label class="form-label pb-2 text-center">Vista Previa</label>
+  <div class="d-flex flex-row justify-content-between">
+    <div class="text-center">
+      <label class="form-label">Portada</label>
+      <img
+        id="vista-previa-portada"
+        src="{% static 'assets/img/no-img.png' %}"
+        alt="portada"
+        width="140"
+        height="140"
+        class="img-cover rounded smooth-hidden-out"
+        onerror="this.src='{% static 'assets/img/no-img.png' %}'"
+      />
+    </div>
+    <div class="text-center">
+      <label class="form-label">Video</label>
+      <iframe
+        id="vista-previa-video"
+        scrolling="no"
+        class="rounded smooth-hidden-out"
+        title="vista-previa"
+        width="140"
+        height="140"
+        src=""
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+
+  <div class="p-5"></div>
+</div>
+{% endblock formulario %} {% block botonLimpiar %}
+<div class="position-relative">
+  <div id="boton-limpiar">
+    <button id="boton-limpiar-click" type="button">Vaciar Campos</button>
+  </div>
+</div>
+{% endblock botonLimpiar %}

@@ -1,0 +1,30 @@
+{% extends 'layout/main-layout.html' %} {% block content %}
+
+<h2
+id="titulo-grid"
+class="d-flex flex-row align-items-center justify-content-between mb-4"
+>
+<span>Lista de Canciones</span>
+<span>
+  <select
+    id="select-ordenar"
+    class="select-ordenar form-select bg-main text-white border-0 rounded-8"
+    name="select-ordenar"
+  >
+    <option value="1">A-Z</option>
+    <option value="2">Z-A</option>
+    <option value="3" selected>Recientes</option>
+    <option value="4">Antiguas</option>
+  </select>
+</span>
+</h2>
+
+<!-- IF CLICK SONG HIDE -->
+<div class="songs-grid p-0">
+<!-- FILA -->
+<div class="row"></div>
+</div>
+<div class="perfil-cancion"></div>
+
+</div>
+{% endblock content %}
