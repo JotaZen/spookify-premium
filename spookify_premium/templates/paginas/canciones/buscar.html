@@ -2,15 +2,18 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1>Search</h1>
-      <input
-        class="form-control"
-        id="myInput"
-        type="text"
-        placeholder="Search.."
-      />
+      <div id="">
+        <div class="form-floating">
+          <input
+            class="form-control no-placeholder form-control-color w-100 border-secondary input-dark"
+            id="myInput"
+            type="text"
+            placeholder="Search.."
+          />
+          <label class="form-label">Buscar</label>
+        </div>
+      </div>
     </div>
   </div>
-
-  {% endblock content %}
 </div>
+{% endblock content %}

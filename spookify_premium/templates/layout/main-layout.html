@@ -3,13 +3,89 @@
   <main class="content">
     <div class="d-flex flex-row w-100 gap-8">
       <!-- SIDEBAR -->
-      {% include './main-sidebar.html' %}
+      <div class="sidebar d-flex flex-column gap-8">
+        <!-- TOP -->
+        <nav class="bg-main sidebar-top">
+          <a href="{% url 'inicio' %}">
+            <span id="boton-inicio-sidebar" class="link-sidebar seleccionable">
+              <svg
+                role="img"
+                height="24"
+                width="24"
+                viewBox="0 0 24 24"
+                class="icono-selected"
+              >
+                <path
+                  d="M13.5 1.515a3 3 0 0 0-3 0L3 5.845a2 2 0 0 0-1 1.732V21a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6h4v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V7.577a2 2 0 0 0-1-1.732l-7.5-4.33z"
+                ></path>
+              </svg>
+              <span>Inicio</span>
+            </span>
+          </a>
+          <a href="{% url 'canciones.busqueda' %}">
+            <span class="link-sidebar seleccionable">
+              <svg
+                class="icono"
+                role="img"
+                height="24"
+                width="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M10.533 1.279c-5.18 0-9.407 4.14-9.407 9.279s4.226 9.279 9.407 9.279c2.234 0 4.29-.77 5.907-2.058l4.353 4.353a1 1 0 1 0 1.414-1.414l-4.344-4.344a9.157 9.157 0 0 0 2.077-5.816c0-5.14-4.226-9.28-9.407-9.28zm-7.407 9.279c0-4.006 3.302-7.28 7.407-7.28s7.407 3.274 7.407 7.28-3.302 7.279-7.407 7.279-7.407-3.273-7.407-7.28z"
+                ></path>
+              </svg>
+              <span>Buscar</span>
+            </span>
+          </a>
+        </nav>
+        <!-- BOTTOM -->
+        <div class="bg-main border-radius-8 h-100 sidebar-bot">
+          <span class="link-sidebar link-sidebar-bot">
+            <div class="boton-biblioteca">
+              <svg
+                role="img"
+                height="24"
+                width="24"
+                viewBox="0 0 24 24"
+                class="icono"
+              >
+                <path
+                  d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z"
+                ></path>
+              </svg>
+              <span>Agregar a tu biblioteca</span>
+            </div>
+            <button
+              type="submit"
+              class="boton-agregar seleccionable-fondo seleccionable"
+            >
+              <svg
+                role="img"
+                height="16"
+                width="16"
+                aria-hidden="true"
+                viewBox="0 0 16 16"
+                class="icono"
+              >
+                <path
+                  d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z"
+                ></path>
+              </svg>
+            </button>
+          </span>
+        </div>
+      </div>
       <!-- MAIN BOX -->
       <div class="main-box bg-main w-100 border-radius-8">
         <header class="position-relative w-100">
           <div class="box-header">
             <div class="botones-nav">
-              <button id="boton-flecha-volver" class="boton-flecha" type="button">
+              <button
+                id="boton-flecha-volver"
+                class="boton-flecha"
+                type="button"
+              >
                 <svg
                   role="img"
                   height="16"
@@ -61,22 +137,17 @@
             </div>
           </div>
         </header>
-      
+
         <div class="biblioteca border-radius-8">
+          <!-- GRID -->
           {% block content %}{% endblock content %}
         </div>
+
+        <!-- FOOTER -->
+      </div>
     </div>
     <!-- INFO BOTTOM -->
-    <div class="informacion flex-fill">
-      <h2 class="info-titulo">Reproduce una canción</h2>
-      <iframe
-        title="player"
-        id="yutu_player"
-        class="smooth-hidden-out"
-        src="https://www.youtube.com/embed/VIDEO_ID"
-        allow="autoplay; fullscreen;"
-      ></iframe>
-    </div>
+    <footer id="layout-footer">{% include './main-footer.html' %}</footer>
   </main>
 </body>
 {% endblock body %}

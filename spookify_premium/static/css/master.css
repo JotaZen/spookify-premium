@@ -585,7 +585,8 @@ a {
 }
 
 #contenedor-formulario input,
-#contenedor-formulario-perfil input {
+#contenedor-formulario-perfil input,
+.input-dark {
     background-color: #202020;
     color: white;
 
@@ -593,14 +594,17 @@ a {
 }
 
 #contenedor-formulario input::placeholder,
-#contenedor-formulario-perfil input::placeholder {
+#contenedor-formulario-perfil input::placeholder,
+.input-dark::placeholder {
     color: #6d6d6d;
 }
 
 #contenedor-formulario input:focus,
 #contenedor-formulario-perfil input:focus,
-#select-ordenar:focus {
+#select-ordenar:focus,
+.input-dark:focus {
     color: white;
+    background-color: #202020;
     outline: none;
     box-shadow: 0px 0px 3px #6d6d6d;
     /* border: 1px solid #6d6d6d; */
