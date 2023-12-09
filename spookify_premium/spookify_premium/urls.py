@@ -21,6 +21,5 @@ from .views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='inicio'),
-    path('artistas', include('apps.artistas.urls')),
-    path('musica', include('apps.canciones.urls')),
+    path('biblioteca/', include('apps.music_library.urls')),
 ]
