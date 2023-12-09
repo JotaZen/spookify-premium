@@ -3,6 +3,10 @@ from django.db import models
 # Create your models here.
 
 
+def file_path(instance, filename):
+    return f'archivos/canciones/{instance.album.artista.nombre}/{instance.album.nombre}/{filename}'
+
+
 class Genero(models.Model):
     nombre = models.CharField(max_length=50, unique=True)
     descripcion = models.TextField(max_length=255, null=True, blank=True)
@@ -19,10 +23,9 @@ class Genero(models.Model):
 
 
 class Artista(models.Model):
-    nombre = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=100, unique=True)
     descripcion = models.TextField(max_length=255, null=True, blank=True)
     logo = models.ImageField(upload_to='logos/artistas', null=True, blank=True)
-    generos = models.ManyToManyField(Genero, related_name='artistas')
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
     activo = models.BooleanField(default=True)
@@ -40,7 +43,8 @@ class Album(models.Model):
     nombre = models.CharField(max_length=150)
     descripcion = models.TextField(max_length=255, null=True, blank=True)
     logo = models.ImageField(upload_to='logos/albumes', null=True, blank=True)
-    artistas = models.ManyToManyField(Artista, related_name='albumes')
+    artista = models.ForeignKey(
+        Artista, related_name='artista', on_delete=models.CASCADE, null=True)
     # generos = models.ManyToManyField(Genero, related_name='albumes')
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
@@ -63,11 +67,12 @@ class Cancion(models.Model):
     nombre = models.CharField(max_length=150)
     descripcion = models.TextField(max_length=255, null=True, blank=True)
     logo = models.ImageField(
-        upload_to='logos/canciones', null=True, blank=True)
+        upload_to=file_path, null=True, blank=True)
+    archivo = models.FileField(
+        upload_to=file_path, null=True, blank=True)
     album = models.ForeignKey(
         Album, related_name='canciones', on_delete=models.CASCADE, null=True, blank=True)
-    artistas = models.ManyToManyField(Artista, related_name='canciones')
-    generos = models.ManyToManyField(Genero, related_name='canciones')
+    # generos = models.ManyToManyField(Genero, related_name='canciones')
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
     activo = models.BooleanField(default=True)

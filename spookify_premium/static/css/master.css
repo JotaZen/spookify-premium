@@ -602,12 +602,18 @@ a {
 #contenedor-formulario input:focus,
 #contenedor-formulario-perfil input:focus,
 #select-ordenar:focus,
-.input-dark:focus {
+.input-dark:focus,
+.input-dark:-webkit-autofill,
+.input-dark:autofill {
     color: white;
     background-color: #202020;
-    outline: none;
+    outline: none !important;
     box-shadow: 0px 0px 3px #6d6d6d;
-    /* border: 1px solid #6d6d6d; */
+    border: 1px solid #6d6d6d;
+    --webkit-text-fill-color: white;
+    --webkit-box-shadow: 0 0 0px 3px #6d6d6d inset;
+    --webkit-background-color: #202020;
+
 }
 
 #boton-limpiar,
@@ -650,7 +656,7 @@ a {
 }
 
 /* CHECKBOX */
-input[type="checkbox"] {
+.input-checkbox-star {
     display: none;
 }
 
@@ -662,7 +668,7 @@ input[type="checkbox"] {
     /* padding-left: 15px; */
 }
 
-input[type="checkbox"]:checked+.label {
+.input-checkbox-star:checked+.label {
     color: rgb(247, 189, 43);
 }
 
