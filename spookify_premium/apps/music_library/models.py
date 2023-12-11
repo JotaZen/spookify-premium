@@ -14,7 +14,7 @@ class Genero(models.Model):
     activo = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.name
+        return self.nombre
 
     class Meta:
         verbose_name = 'Género'
@@ -31,7 +31,7 @@ class Artista(models.Model):
     activo = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.name
+        return self.nombre
 
     class Meta:
         verbose_name = 'Artista'
@@ -51,7 +51,7 @@ class Album(models.Model):
     active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.name
+        return self.nombre
 
     class Meta:
         verbose_name = 'Album'
@@ -78,7 +78,7 @@ class Cancion(models.Model):
     activo = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.name
+        return self.nombre
 
     class Meta:
         verbose_name = 'Canción'

@@ -1,0 +1,9 @@
+{% extends 'layout/main-layout.html' %} {% block content %}
+
+<div id="songs-grid" class="row"></div>
+{% load static %}
+<script
+  type="module"
+  src="{% static 'js/web/biblioteca/musica/main.js' %}"
+></script>
+{% endblock content %}
