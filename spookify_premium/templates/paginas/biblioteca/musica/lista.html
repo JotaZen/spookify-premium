@@ -1,4 +1,73 @@
 {% extends 'layout/main-layout.html' %} {% block content %}
+<h2
+  id="titulo-grid"
+  class="d-flex flex-row align-items-center justify-content-between py-5"
+>
+  Lista de Canciones
+  {% if  perms.music_library.add_song %}
+  <a href="{% url 'musica.respaldo' %}" class="btn btn-teal">Descargar Data</a>
+  {% endif %}
+</h2>
+
+<div class="mb-3">
+  <form
+    method="post"
+    class="d-flex justify-content-center gap-3 align-items-center"
+  >
+  {% csrf_token %}
+    <div class="botones-nav d-flex align-items-center">
+    <button
+    title="Página anterior"
+    id="boton-flecha-volver"
+    class="boton-flecha bg-teal"
+    type="button"
+    {%if canciones.has_previous%}
+      onclick="window.location.href='?pagina={{ canciones.previous_page_number }}'"
+    {% else %}
+    disabled
+    {% endif %}
+    >
+    <svg role="img" height="16" width="16" viewBox="0 0 16 16" class="icono">
+        <path
+        d="M11.03.47a.75.75 0 0 1 0 1.06L4.56 8l6.47 6.47a.75.75 0 1 1-1.06 1.06L2.44 8 9.97.47a.75.75 0 0 1 1.06 0z"
+        ></path>
+      </svg>
+    </button>
+    <p class="numero-pagina m-0 font-weigth-bold">
+      {{ canciones.number }}-{{ canciones.paginator.num_pages }}
+    </p>
+    <button
+      title="Página siguiente"
+      class="boton-flecha"
+      type="button"
+      {%if canciones.has_next%}
+        onclick="window.location.href='?pagina={{ canciones.next_page_number }}'"
+      {% else %}
+        disabled
+      {% endif %}
+    >
+      <svg role="img" height="16" width="16" viewBox="0 0 16 16" class="icono">
+        <path
+          d="M4.97.47a.75.75 0 0 0 0 1.06L11.44 8l-6.47 6.47a.75.75 0 1 0 1.06 1.06L13.56 8 6.03.47a.75.75 0 0 0-1.06 0z"
+        ></path>
+      </svg>
+    </button>
+  </div>
+
+  
+    <div class="w-25">{{filtro.nombre}}</div>
+
+    <div>{{filtro.artista}}</div>
+    <div>{{filtro.genero}}</div>
+    <div>{{filtro.album}}</div>
+    <div>
+      <div>
+        <button type="submit" class="btn btn-teal small">Buscar</button>
+      </div>
+    </div>
+  </form>
+  
+</div>
 
 <div id="songs-grid" class="row">
   {% for cancion in canciones %}
@@ -6,6 +75,7 @@
     <div
       class="card bg-card text-white h-100 cancion-card"
       data-id="{{cancion.id}}"
+
     >
       <div class="position-relative">
         <button
@@ -39,18 +109,54 @@
           alt="{% if cancion.nombre %} {{cancion.nombre}}{% else %}Sin Título{% endif %}"
         />
       </div>
-      <div class="card-body">
+      <div class="card-body position-relative">
         <p class="card-title titulo-cancion">
           {% if cancion.nombre %} {{cancion.nombre}} {% else %} Sin Título
           {%endif %}
         </p>
         <p class="card-text nombre-autor">
-          {% if cancion.autor %} {{cancion.autor}} {% else %} Sin Autor
+          {% if cancion.album %} {{cancion.album.artista.nombre}} {% else %} Sin Autor
+          {%endif%}
+          {% if cancion.album %} - {{cancion.album.nombre}} {% else %} - Sin Album
           {%endif%}
         </p>
+        <p class="card-text nombre-autor">
+          {% if cancion.genero %} {{cancion.genero.nombre}} {% else %} Sin Género
+          {%endif%}
+        </p>
+        <p class="card-text nombre-album">
+        <div class="d-flex flex-row align-items-center justify-content-between py-0">
+          <a onclick="window.location.href='/biblioteca/musica/editar/{{cancion.id}}'" class="link small text-info">Editar</a>
+          <a onclick="confirmarBorrar({{cancion.id}})" class="link small text-danger">Eliminar</a>
+        </div>
+        
       </div>
     </div>
+
   </div>
   {% endfor %}
 </div>
-{% endblock content %} {% block js %} {% endblock js %}
+{% endblock content %} {% block js %} 
+<script>
+
+  function confirmarBorrar(id) {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "No se puede deshacer",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "teal",
+      cancelButtonColor: "#cc0000",
+      cancelButtonText: "Cancelar",
+      confirmButtonText: "Si",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href='/biblioteca/musica/eliminar/' + id;
+      }
+    });
+  } 
+
+</script>
+
+
+{% endblock js %}

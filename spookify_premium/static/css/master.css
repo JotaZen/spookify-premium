@@ -552,6 +552,11 @@ a:has(.icono-selected) {
     object-fit: cover !important;
     aspect-ratio: 1 / 1;
 }
+.imagen-artista {
+    border-radius: 100%;
+    object-fit: cover !important;
+    aspect-ratio: 1 / 1;
+}
 
 .titulo-cancion {
     font-size: 0.8rem;
@@ -889,7 +894,7 @@ audio::-webkit-media-controls-time-remaining-display {
 
 
 .btn-teal {
-    background-color: rgb(58, 173, 160);
+    background-color: rgb(58, 173, 160) !important;
     color: white;
 }
 

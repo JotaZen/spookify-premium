@@ -3,7 +3,6 @@
   <h1>{{ titulo }}</h1>
 </div>
 <div class="container">
-
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="container px-5">
@@ -17,20 +16,27 @@
         id="boton-submit-formulario"
       />
       <input
-      type="reset"
-      class="btn btn-rainbow text-white"
-      value="Reiniciar"
-    />
+        type="reset"
+        class="btn btn-rainbow text-white"
+        value="Reiniciar"
+      />
     </div>
   </form>
 </div>
-{% if messages %} {% block js %} {% load static %}
-<script
-  type="text/javascript"
-  src="{% static 'js/formularios/formDjangoGenerico.js' %}"
-></script>
-{% for msg in messages %}
-<script>
-  notificarMensaje("{{msg}}", "{{ ruta }}");
+{% if messages %} {% for msg in messages %}
+<script type="module">
+  Swal.fire({
+    icon: "success",
+    title: "{{ msg }}",
+    toast: true,
+    position: "bottom",
+    background: "green",
+    color: "white",
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+  }).then((result) => {
+    window.location.href = '{{redirect_url}}';
+  });
 </script>
-{% endfor %} {% endblock js %} {% endif %} {% endblock content %}
+{% endfor %} {% endif %} {% endblock content %}

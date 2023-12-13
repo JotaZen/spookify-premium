@@ -1,14 +1,13 @@
 {% extends 'layout/main-layout.html' %} {% block content %}
+
 <h2
   id="titulo-grid"
   class="d-flex flex-row align-items-center justify-content-between py-5"
 >
-  Artistas {% if perms.artistas.add_artista %}
-  <a href="{% url 'artistas.agregar' %}" class="btn btn-secondary">Agregar</a>
-  {% endif %}
+  Géneros
+  <a href="{% url 'generos.agregar' %}" class="btn btn-secondary">Agregar</a>
 </h2>
-
-<div class="mb-3">
+<div class="mb-5">
   <form
     method="post"
     class="d-flex justify-content-center gap-3 align-items-center"
@@ -19,8 +18,8 @@
     id="boton-flecha-volver"
     class="boton-flecha bg-teal"
     type="button"
-    {%if artistas.has_previous%}
-      onclick="window.location.href='?pagina={{ artistas.previous_page_number }}'"
+    {%if generos.has_previous%}
+      onclick="window.location.href='?pagina={{ generos.previous_page_number }}'"
     {% else %}
     disabled
     {% endif %}
@@ -32,14 +31,14 @@
       </svg>
     </button>
     <p class="numero-pagina m-0 font-weigth-bold">
-      {{ artistas.number }}-{{ artistas.paginator.num_pages }}
+      {{ generos.number }}-{{ generos.paginator.num_pages }}
     </p>
     <button
       title="Página siguiente"
       class="boton-flecha"
       type="button"
-      {%if artistas.has_next%}
-        onclick="window.location.href='?pagina={{ artistas.next_page_number }}'"
+      {%if generos.has_next%}
+        onclick="window.location.href='?pagina={{ generos.next_page_number }}'"
       {% else %}
         disabled
       {% endif %}
@@ -52,7 +51,8 @@
     </button>
   </div>
     {% csrf_token %}
-    <div class="w-50">{{filtro.nombre}}</div>
+    <div class="w-25">{{filtro.nombre}}</div>
+    <div class="">{{filtro.artista}}</div>
     <div>
       <div>
         <button type="submit" class="btn btn-teal small">Buscar</button>
@@ -62,37 +62,37 @@
   </form>
   
 </div>
-
 <div id="songs-grid" class="row">
-  {% for artista in artistas %}
-  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 pb-4">
+  {% for genero in generos %}
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 pb-4">
     <div
       class="card bg-card text-white h-100 cancion-card"
-      data-id="{{artista.id}}"
+      data-id="{{genero.id}}"
     >
-      <div class="position-relative">
-        <img
-          class="card-img-top imagen-artista"
-          src="{{artista.logo.url}}"
-          alt="{{artista.nombre}}"
-        />
-      </div>
       <div class="card-body">
-        <p class="card-title titulo-cancion">{{artista.nombre}}</p>
-        <p class="card-text nombre-autor">Artista</p>
-        <div class="d-flex flex-row align-items-center justify-content-between py-0 px-5">
-          <a onclick="window.location.href='/biblioteca/artistas/editar/{{artista.id}}'" class="link small text-info">Editar</a>
-          <a onclick="confirmarBorrar({{artista.id}})" class="link small text-danger">Eliminar</a>
+        <p class="card-title titulo-cancion">{{genero.nombre}}</p>
+        <p class="card-text nombre-autor">{{genero.descripcion}} &nbsp;</p>
+        <div
+          class="d-flex flex-row align-items-center justify-content-between py-0 px-4"
+        >
+          <a
+            onclick="window.location.href='/biblioteca/generos/editar/{{genero.id}}'"
+            class="link small text-info"
+            >Editar</a
+          >
+          <a
+            onclick="confirmarBorrar({{genero.id}})"
+            class="link small text-danger"
+            >Eliminar</a
+          >
         </div>
       </div>
-
     </div>
   </div>
   {% endfor %}
 </div>
-{% endblock content %} {% block js %} 
 <script>
-
+  
   function confirmarBorrar(id) {
     Swal.fire({
       title: "¿Estás seguro?",
@@ -105,11 +105,11 @@
       confirmButtonText: "Si",
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href='/biblioteca/artistas/eliminar/' + id;
+        window.location.href='/biblioteca/generos/eliminar/' + id;
       }
     });
   } 
 
 </script>
 
-{% endblock js %}
+{% endblock content%}
