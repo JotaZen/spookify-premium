@@ -1,9 +1,56 @@
 {% extends 'layout/main-layout.html' %} {% block content %}
 
-<div id="songs-grid" class="row"></div>
-{% load static %}
-<script
-  type="module"
-  src="{% static 'js/web/biblioteca/musica/main.js' %}"
-></script>
-{% endblock content %}
+<div id="songs-grid" class="row">
+  {% for cancion in canciones %}
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-2 pb-4">
+    <div
+      class="card bg-card text-white h-100 cancion-card"
+      data-id="{{cancion.id}}"
+    >
+      <div class="position-relative">
+        <button
+          title="{{cancion.nombre}}"
+          class="play-button {% if cancion.archivo %} {% else %} play-button-disabled {% endif %}"
+          id="song-{{cancion.id}}"
+        >
+          <svg
+            role="img"
+            height="24"
+            width="24"
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+          >
+            <path
+              id="icono-play-{{cancion.id}}"
+              url="{{cancion.archivo.url}}"
+              d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"
+            ></path>
+
+            <path
+              id="icono-pause-{{cancion.id}}"
+              class="d-none"
+              d="M5.7 3a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7H5.7zm10 0a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7h-2.6z"
+            ></path>
+          </svg>
+        </button>
+        <img
+          class="card-img-top imagen-cancion"
+          src="{{cancion.logo.url}}"
+          alt="{% if cancion.nombre %} {{cancion.nombre}}{% else %}Sin Título{% endif %}"
+        />
+      </div>
+      <div class="card-body">
+        <p class="card-title titulo-cancion">
+          {% if cancion.nombre %} {{cancion.nombre}} {% else %} Sin Título
+          {%endif %}
+        </p>
+        <p class="card-text nombre-autor">
+          {% if cancion.autor %} {{cancion.autor}} {% else %} Sin Autor
+          {%endif%}
+        </p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %} {% block js %} {% endblock js %}

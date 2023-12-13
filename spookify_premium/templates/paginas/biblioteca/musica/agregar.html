@@ -2,21 +2,20 @@
 <br class="my-4" />
 <h1 class="my-4 text-center">Agrega una canción</h1>
 <br class="my-4" />
-<br class="my-4" />
-<br class="my-4" />
-<br class="my-4" />
-<br class="my-4" />
-<div class="container px-5">
-  <section class="form-floating">
-    <input
-      type="text"
-      class="form-control input-dark"
-      id="nombre_cancion"
-      name="nombre"
-      placeholder="Nombre de la canción"
-    />
-    <label for="nombre_cancion" class="form-label">Título</label>
-  </section>
-</div>
 
+{% comment %}
+<section class="form-floating">
+  <input
+    type="text"
+    class="form-control input-dark"
+    id="nombre_cancion"
+    name="nombre"
+    placeholder="Nombre de la canción"
+  />
+  <label for="nombre_cancion" class="form-label">Título</label>
+</section>
+{% endcomment %}
+<div class="container px-5">
+  <div class="w-75 mx-auto">{{form}}</div>
+</div>
 {% endblock content %}

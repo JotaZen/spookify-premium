@@ -10,7 +10,7 @@
           height="24"
           width="24"
           viewBox="0 0 24 24"
-          class="icono-selected"
+          {% if request.resolver_match.url_name == 'inicio' %} class="icono-selected" {% else %} class="icono" {% endif %}
         >
           <path
             d="M13.5 1.515a3 3 0 0 0-3 0L3 5.845a2 2 0 0 0-1 1.732V21a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6h4v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V7.577a2 2 0 0 0-1-1.732l-7.5-4.33z"
@@ -22,7 +22,7 @@
     <a href="{% url 'musica.busqueda' %}">
       <span class="link-sidebar seleccionable">
         <svg
-          class="icono"
+          {% if request.resolver_match.url_name == 'musica.busqueda' %} class="icono-selected" {% else %} class="icono" {% endif %}
           role="img"
           height="24"
           width="24"
@@ -38,24 +38,9 @@
   </nav>
   <!-- BOTTOM -->
   <div class="bg-main border-radius-8 h-100 sidebar-bot">
-    <span class="link-sidebar link-sidebar-bot">
-      <div class="boton-biblioteca">
-        <svg
-          role="img"
-          height="24"
-          width="24"
-          viewBox="0 0 24 24"
-          class="icono"
-        >
-          <path
-            d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z"
-          ></path>
-        </svg>
-        <span>Agregar a tu biblioteca</span>
-      </div>
+    <div class="boton-biblioteca">
       <a
-        type="submit"
-        class="boton-agregar seleccionable-fondo seleccionable"
+        class="link-sidebar link-sidebar-bot"
         href="{% url 'musica.agregar' %}"
       >
         <svg
@@ -63,14 +48,38 @@
           height="24"
           width="24"
           viewBox="0 0 24 24"
-          class="icono"
+  
+          {% if request.resolver_match.url_name == 'musica.agregar' %} class="icono-selected" {% else %} class="icono" {% endif %}
         >
           <path
-            d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z"
+            d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z"
           ></path>
         </svg>
+        <span>Agregar a la biblioteca</span>
       </a>
-    </span>
+    </div>
+    {% comment %}
+    <a
+      type="submit"
+      class="boton-agregar seleccionable-fondo seleccionable"
+      href="{% url 'musica.agregar' %}"
+    >
+      <div class="d-flex align-items-center justify-content-center">
+        <svg height="24" width="24" viewBox="0 0 24 24" class="icono p-0 m-0">
+          <path
+            {%
+            comment
+            %}
+            d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z"
+            {%
+            endcomment
+            %}
+          ></path>
+        </svg>
+      </div>
+    </a>
+    {% endcomment %} {% comment %}
+    <span class="link-sidebar link-sidebar-bot"> </span> {% endcomment %}
     <a class="link-sidebar link-sidebar-bot" href="{% url 'musica.lista' %}">
       <div class="boton-biblioteca">
         <svg
@@ -78,7 +87,7 @@
           height="24"
           width="24"
           viewBox="0 0 24 24"
-          class="icono"
+          {% if request.resolver_match.url_name == 'musica.lista' %} class="icono-selected" {% else %} class="icono" {% endif %}
         >
           <path
             d="M6.233.371a4.388 4.388 0 0 1 5.002 1.052c.421.459.713.992.904 1.554.143.421.263 1.173.22 1.894-.078 1.322-.638 2.408-1.399 3.316l-.127.152a.75.75 0 0 0 .201 1.13l2.209 1.275a4.75 4.75 0 0 1 2.375 4.114V16H.382v-1.143a4.75 4.75 0 0 1 2.375-4.113l2.209-1.275a.75.75 0 0 0 .201-1.13l-.126-.152c-.761-.908-1.322-1.994-1.4-3.316-.043-.721.077-1.473.22-1.894a4.346 4.346 0 0 1 .904-1.554c.411-.448.91-.807 1.468-1.052zM8 1.5a2.888 2.888 0 0 0-2.13.937 2.85 2.85 0 0 0-.588 1.022c-.077.226-.175.783-.143 1.323.054.921.44 1.712 1.051 2.442l.002.001.127.153a2.25 2.25 0 0 1-.603 3.39l-2.209 1.275A3.25 3.25 0 0 0 1.902 14.5h12.196a3.25 3.25 0 0 0-1.605-2.457l-2.209-1.275a2.25 2.25 0 0 1-.603-3.39l.127-.153.002-.001c.612-.73.997-1.52 1.052-2.442.032-.54-.067-1.097-.144-1.323a2.85 2.85 0 0 0-.588-1.022A2.888 2.888 0 0 0 8 1.5z"

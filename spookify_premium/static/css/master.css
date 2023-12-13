@@ -94,10 +94,19 @@ a {
 
 .icono {
     fill: rgb(179, 179, 179);
+    justify-self: center;
+    align-self: center;
+    padding: 0;
+    margin: 0;
 }
 
 .icono-selected {
     fill: white;
+}
+
+a:has(.icono-selected) {
+    fill: white;
+    color: white;
 }
 
 .hidden {
@@ -419,6 +428,8 @@ a {
 .botones-nav-der:hover svg {
     scale: 1.05;
 }
+
+
 
 /* MAIN CONTENT */
 
@@ -826,4 +837,78 @@ label::after {
     /* background-color: #18181850; */
     transform: scale(1.1);
     fill: white;
+}
+
+
+/* PLAYER */
+
+
+#music-player {
+    padding-top: 6px;
+    width: 100%;
+}
+
+audio::-webkit-media-controls-panel {
+    background-image: linear-gradient(90deg,
+            rgb(175, 40, 150),
+            rgb(80, 155, 245));
+}
+
+audio::-webkit-media-controls-play-button {
+    background-color: linear-gradient(90deg,
+            rgb(175, 40, 150),
+            rgb(80, 155, 245));
+    scale: 1.3;
+    border-radius: 50%;
+    margin-right: 16px;
+}
+
+audio::-webkit-media-controls-play-button:hover {
+    background-color: rgb(80, 155, 245);
+}
+
+audio::-webkit-media-controls-panel {
+    background-image: linear-gradient(90deg,
+            rgb(175, 40, 150),
+            rgb(80, 155, 245));
+}
+
+audio::-webkit-media-controls-current-time-display {
+    color: #fff;
+}
+
+audio::-webkit-media-controls-panel {
+    background-image: linear-gradient(90deg,
+            rgb(175, 40, 150),
+            rgb(80, 155, 245));
+}
+
+audio::-webkit-media-controls-time-remaining-display {
+    color: #fff;
+}
+
+
+.btn-teal {
+    background-color: rgb(58, 173, 160);
+    color: white;
+}
+
+.btn-teal:hover {
+    background-color: #4fd1c5;
+    color: white;
+}
+
+.btn-rainbow {
+    transition: all 0.2s;
+    background-color:
+        rgb(80, 155, 245);
+    color: white;
+}
+
+.btn-rainbow:hover {
+    transition: all 0.2s;
+    background-color:
+        rgb(175, 40, 150);
+
+    color: white;
 }

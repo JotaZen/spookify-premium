@@ -1,0 +1,36 @@
+{% extends 'layout/main-layout.html' %} {% block content %}
+<div class="alert text-center pt-5">
+  <h1>{{ titulo }}</h1>
+</div>
+<div class="container">
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="container px-5">
+      <div class="w-75 mx-auto">{{ formularioGenerico }}</div>
+    </div>
+    <div class="mt-3 d-flex justify-content-center gap-3">
+      <input
+        type="submit"
+        class="btn btn-teal"
+        value="Guardar Cambios"
+        id="boton-submit-formulario"
+      />
+      <input
+      type="reset"
+      class="btn btn-rainbow text-white"
+      value="Reiniciar"
+    />
+    </div>
+  </form>
+</div>
+{% if messages %} {% block js %} {% load static %}
+<script
+  type="text/javascript"
+  src="{% static 'js/formularios/formDjangoGenerico.js' %}"
+></script>
+{% for msg in messages %}
+<script>
+  notificarMensaje("{{msg}}", "{{ ruta }}");
+</script>
+{% endfor %} {% endblock js %} {% endif %} {% endblock content %}

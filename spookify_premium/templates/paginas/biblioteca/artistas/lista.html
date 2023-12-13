@@ -1,0 +1,25 @@
+{% extends 'layout/main-layout.html' %} {% block content %}
+
+<div id="songs-grid" class="row">
+  {% for artista in canciones %}
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-2 pb-4">
+    <div
+      class="card bg-card text-white h-100 cancion-card"
+      data-id="{{artista.id}}"
+    >
+      <div class="position-relative">
+        <img
+          class="card-img-top imagen-cancion"
+          src="{{artista.logo.url}}"
+          alt="{{artista.nombre}}"
+        />
+      </div>
+      <div class="card-body">
+        <p class="card-title titulo-cancion">{{artista.nombre}}</p>
+        <p class="card-text nombre-autor">Artista</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %} {% block js %} {% endblock js %}

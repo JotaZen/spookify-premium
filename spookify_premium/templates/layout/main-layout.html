@@ -50,7 +50,7 @@
             </div>
             <div class="links-nav">
               <a href="https://github.com/JotaZen" class="text-decoration-none">
-                <p class="botones-nav-der-neg">Jordy Zenteno</p>
+                <p class="botones-nav-der-neg">WIP</p>
               </a>
               <a
                 href="https://github.com/JotaZen/spookify"
@@ -85,5 +85,81 @@
     <!-- INFO BOTTOM -->
     <footer id="layout-footer">{% include './main-footer.html' %}</footer>
   </main>
+  <script>
+    $(document).ready(function () {
+      let previousSong = null;
+  
+      function pausar(iconoPlay, iconoPause) {
+        iconoPlay.removeClass("d-none");
+        iconoPause.addClass("d-none");
+        $("#music-player")[0].pause();
+      }
+      function reproducir(iconoPlay, iconoPause) {
+        iconoPlay.addClass("d-none");
+        iconoPause.removeClass("d-none");
+      }
+  
+      $(".play-button").on("click", function () {
+        const id = $(this).attr("id").split("-")[1];
+        if (!previousSong) previousSong = id;
+        const iconoPlay = $("#icono-play-" + id);
+        const iconoPause = $("#icono-pause-" + id);
+  
+        const url = iconoPlay.attr("url");
+  
+        const reproductor = $("#music-player");
+  
+        if (previousSong != id) {
+          pausar(
+            $("#icono-play-" + previousSong),
+            $("#icono-pause-" + previousSong)
+          );
+          previousSong = id;
+        }
+        reproducir(iconoPlay, iconoPause);
+  
+        if (reproductor.attr("src") == url) {
+          if (reproductor[0].paused) {
+            reproducir(iconoPlay, iconoPause);
+            reproductor[0].play();
+          } else {
+            pausar(iconoPlay, iconoPause);
+            reproductor[0].pause();
+          }
+          return;
+        }
+  
+        $("#music-player").remove();
+        $("#music-player-container").append(
+          `<audio id="music-player" controls src="${url}" preload="none" autoplay></audio>`
+        );
+        $("#titulo-cancion")[0].innerHTML = $(this).attr("title");
+
+        $("#music-player").on("ended", function () {
+          pausar(iconoPlay, iconoPause);
+       
+          const nextPlayButton = $(".play-button").filter(function () {
+            const nextId = $(this).attr("id").split("-")[1];
+            return nextId !== id && $("#icono-play-" + nextId).attr("url") !== url;
+          });
+        
+          // Trigger click event on the next play button if found
+          if (nextPlayButton.length > 0) {
+            nextPlayButton.click();
+          }
+
+        });
+  
+        $("#music-player").on("pause", function () {
+          pausar(iconoPlay, iconoPause);
+        });
+  
+        $("#music-player").on("play", function () {
+          reproducir(iconoPlay, iconoPause);
+        });
+      });
+    });
+  </script>
+  {% block js %}{% endblock js %}
 </body>
 {% endblock body %}

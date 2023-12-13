@@ -1,4 +1,4 @@
-export const notificacionToast = (icono, titulo, mensaje) => {
+export const notificacionToast = (icono, titulo, mensaje = null) => {
     const backgroundColors = {
         'success': 'green',
         'error': '#cc0000',
